@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Header from './components/Header';
+import ChecklistPage from './components/ChecklistPage';
+import FarmerProfilePage from './components/FarmProfilePage';
+import LandingPage from './components/LandingPage';
 
-function App() {
+const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Set the page title based on the current route
+    switch (location.pathname) {
+      case '/':
+        document.title = 'Application Checklist - Khula';
+        break;
+      case '/farmer-profile':
+        document.title = 'Farmer Profile - Khula';
+        break;
+      case '/landing-continue-khula':
+        document.title = 'Continue Your Application - Khula';
+        break;
+      default:
+        document.title = 'Khula Platform';
+        break;
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* Render Header for all routes except "/farmer-profile" */}
+      {location.pathname !== '/farmer-profile' && <Header />}
+      <Routes>
+        <Route path="/" element={<ChecklistPage />} />
+        <Route path="/farmer-profile" element={<FarmerProfilePage />} />
+        <Route path="/landing-continue-khula" element={<LandingPage />} />
+      </Routes>
+    </>
   );
-}
+};
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;
