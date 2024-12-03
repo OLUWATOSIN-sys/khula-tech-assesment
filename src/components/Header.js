@@ -156,7 +156,7 @@ const Header = () => {
           <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           <span>Cart</span>
         </div>
-        <a className="logout" href="/logout">Logout</a>
+        <a className="logout" href="/">Logout</a>
       </RightWrapper>
     </HeaderWrapper>
   );

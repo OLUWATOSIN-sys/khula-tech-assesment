@@ -102,6 +102,7 @@ const Column = styled.div`
         height: 20px;
         outline: none;
         cursor: pointer;
+        
 
         &:checked {
           background-color: #28a745;
